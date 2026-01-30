@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Beauty за минути to book appointments. Find our location, hours, and contact information.">
   <title>Contact Us - Beauty за минути</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <nav class="container">
-      <div class="logo">✨ Beauty за минути</div>
+      <a href="index.html" class="logo">✨ Beauty за минути</a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html">Services</a></li>
@@ -21,33 +22,34 @@
   <main class="container">
     <section>
       <h1>Contact Us</h1>
-      <p>Get in touch with us to book your appointment or ask any questions!</p>
+      <p>Get in touch with us to book your appointment or ask any questions about our services.</p>
     </section>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
-      <section>
+    <section class="contact-section">
+      <div>
         <h2>Contact Form</h2>
         <form>
           <div class="form-group">
-            <label for="name">Full Name</label>
+            <label for="name">Full Name *</label>
             <input type="text" id="name" name="name" required>
           </div>
 
           <div class="form-group">
-            <label for="email">Email Address</label>
+            <label for="email">Email Address *</label>
             <input type="email" id="email" name="email" required>
           </div>
 
           <div class="form-group">
-            <label for="phone">Phone Number</label>
+            <label for="phone">Phone Number *</label>
             <input type="tel" id="phone" name="phone" required>
           </div>
 
           <div class="form-group">
-            <label for="service">Preferred Service</label>
+            <label for="service">Preferred Service *</label>
             <select id="service" name="service" required>
               <option value="">Select a service</option>
               <option value="manicure">Express Manicure</option>
+              <option value="gel-manicure">Gel Manicure</option>
               <option value="pedicure">Gel Pedicure</option>
               <option value="makeup">Makeup Services</option>
               <option value="hair">Hair Services</option>
@@ -57,12 +59,12 @@
           </div>
 
           <div class="form-group">
-            <label for="date">Preferred Date</label>
+            <label for="date">Preferred Date *</label>
             <input type="date" id="date" name="date" required>
           </div>
 
           <div class="form-group">
-            <label for="time">Preferred Time</label>
+            <label for="time">Preferred Time *</label>
             <input type="time" id="time" name="time" required>
           </div>
 
@@ -73,9 +75,9 @@
 
           <button type="submit" class="btn">Book Appointment</button>
         </form>
-      </section>
+      </div>
 
-      <section>
+      <div>
         <h2>Get In Touch</h2>
         <div class="contact-info">
           <div class="info-card">
@@ -85,40 +87,43 @@
 
           <div class="info-card">
             <h3>📞 Phone</h3>
-            <p><strong>Call us:</strong><br>(555) 123-4567</p>
-            <p><strong>WhatsApp:</strong><br>(555) 123-4567</p>
+            <p><strong>Call us:</strong><br><a href="tel:+15551234567">(555) 123-4567</a></p>
+            <p><strong>WhatsApp:</strong><br><a href="https://wa.me/15551234567">(555) 123-4567</a></p>
           </div>
 
           <div class="info-card">
             <h3>✉️ Email</h3>
-            <p><strong>General:</strong><br>hello@beautyzaminuti.com</p>
-            <p><strong>Bookings:</strong><br>book@beautyzaminuti.com</p>
+            <p><strong>General:</strong><br><a href="mailto:hello@beautyzaminuti.com">hello@beautyzaminuti.com</a></p>
+            <p><strong>Bookings:</strong><br><a href="mailto:book@beautyzaminuti.com">book@beautyzaminuti.com</a></p>
           </div>
 
           <div class="info-card">
-            <h3>🕐 Hours</h3>
+            <h3>🕐 Business Hours</h3>
             <p><strong>Monday - Friday:</strong><br>9:00 AM - 8:00 PM</p>
             <p><strong>Saturday:</strong><br>10:00 AM - 6:00 PM</p>
             <p><strong>Sunday:</strong><br>Closed</p>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
     <section>
       <h2>Follow Us On Social Media</h2>
       <div class="contact-info">
-        <div class="info-card" style="text-align: center;">
-          <h3>🧴 Instagram</h3>
-          <p><a href="#" style="color: #d4a5a5;">@beautyzaminuti</a></p>
+        <div class="info-card text-center">
+          <h3>📸 Instagram</h3>
+          <p><a href="https://instagram.com" target="_blank">@beautyzaminuti</a></p>
+          <p style="font-size: 0.85rem; color: var(--text-light);">Follow for daily beauty tips & transformations</p>
         </div>
-        <div class="info-card" style="text-align: center;">
+        <div class="info-card text-center">
           <h3>👍 Facebook</h3>
-          <p><a href="#" style="color: #d4a5a5;">Beauty за минути</a></p>
+          <p><a href="https://facebook.com" target="_blank">Beauty за минути</a></p>
+          <p style="font-size: 0.85rem; color: var(--text-light);">Join our community for special offers</p>
         </div>
-        <div class="info-card" style="text-align: center;">
+        <div class="info-card text-center">
           <h3>🎥 TikTok</h3>
-          <p><a href="#" style="color: #d4a5a5;">@beautyzaminuti</a></p>
+          <p><a href="https://tiktok.com" target="_blank">@beautyzaminuti</a></p>
+          <p style="font-size: 0.85rem; color: var(--text-light);">Quick beauty hacks and tutorials</p>
         </div>
       </div>
     </section>

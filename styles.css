@@ -49,6 +49,13 @@ header {
   z-index: 1000;
 }
 
+/* Make sure nav is visible and slightly translucent when scrolling */
+header.scrolled {
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--shadow-md);
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -83,6 +90,20 @@ nav {
   font-size: 0.95rem;
   position: relative;
   transition: var(--transition);
+}
+
+.nav-links a.active {
+  color: var(--primary-color);
+}
+
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* Small visual for keyboard focus */
+.nav-links a:focus {
+  outline: 3px solid rgba(212,165,165,0.15);
+  outline-offset: 4px;
 }
 
 .nav-links a::after {

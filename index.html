@@ -258,24 +258,56 @@
   </footer>
 
   <script>
-    // Optional: highlight active nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    // Use IntersectionObserver to highlight active nav link and toggle header scroll style
+    (function () {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+      const header = document.querySelector('header');
 
-    function onScroll() {
-      const scrollPos = window.scrollY + 120; // offset for sticky header
-      sections.forEach(sec => {
-        if (sec.offsetTop <= scrollPos && (sec.offsetTop + sec.offsetHeight) > scrollPos) {
-          navLinks.forEach(a => a.classList.remove('active'));
-          const link = document.querySelector(`.nav-links a[href="#${sec.id}"]`);
-          if (link) link.classList.add('active');
-        }
+      // Toggle header scrolled class based on page Y offset
+      function checkHeader() {
+        if (window.scrollY > 10) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      }
+
+      checkHeader();
+      window.addEventListener('scroll', checkHeader, { passive: true });
+
+      // IntersectionObserver options: consider section active when 40% visible
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: [0.4, 0.6]
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+          if (entry.isIntersecting) {
+            // remove active from all and set this one
+            navLinks.forEach(a => a.classList.remove('active'));
+            if (link) link.classList.add('active');
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(section => observer.observe(section));
+
+      // Smooth scrolling behavior: adjust scroll to account for sticky header when clicking links
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (!href || !href.startsWith('#')) return;
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (!target) return;
+          const headerHeight = header.offsetHeight;
+          const targetPos = target.getBoundingClientRect().top + window.pageYOffset - headerHeight + 8; // small gap
+          window.scrollTo({ top: targetPos, behavior: 'smooth' });
+        });
       });
-    }
-
-    window.addEventListener('scroll', onScroll);
-    // trigger once
-    onScroll();
+    })();
   </script>
 </body>
 </html>

@@ -109,6 +109,8 @@ main {
 
 section {
   margin-bottom: clamp(2.5rem, 10vw, 4rem);
+  /* Ensure anchors scroll into view below the sticky header */
+  scroll-margin-top: 6.5rem;
 }
 
 /* ===== TYPOGRAPHY ===== */

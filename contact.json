@@ -1,0 +1,15 @@
+{
+  "name": "Beauty за минути",
+  "address": "123 Beauty Avenue\nNew York, NY 10001\nСъединени щати",
+  "phone": "+15551234567",
+  "whatsapp": "+15551234567",
+  "email_general": "hello@beautyzaminuti.com",
+  "email_booking": "book@beautyzaminuti.com",
+  "hours": [
+    { "label": "Понеделник - Петък", "time": "9:00 - 20:00" },
+    { "label": "Събота", "time": "10:00 - 18:00" },
+    { "label": "Неделя", "time": "Почивен ден" }
+  ],
+  "logo": "assets/logo-placeholder.png",
+  "source": "manual"
+}

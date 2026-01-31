@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Beauty за минути - Бързи и професионални услуги за красота за минути. Маникюр, грим, оформяне на коса и още.">
   <title>Beauty за минути</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
   <header>
@@ -231,29 +231,33 @@
 
       <div>
         <h2>Свържете се с нас</h2>
-        <div class="contact-info">
-          <div class="info-card">
+        <div class="contact-info" id="contact-info">
+          <div class="info-card" id="card-logo">
+            <div style="text-align:center;">
+              <img id="business-logo" src="assets/logo-placeholder.png" alt="Лого" style="max-width:140px; height:auto; display:inline-block; border-radius:8px;">
+            </div>
+          </div>
+
+          <div class="info-card" id="card-address">
             <h3>📍 Местоположение</h3>
-            <p>123 Beauty Avenue<br>New York, NY 10001<br>Съединени щати</p>
+            <p id="address">—</p>
           </div>
 
-          <div class="info-card">
+          <div class="info-card" id="card-phone">
             <h3>📞 Телефон</h3>
-            <p><strong>Обадете ни се:</strong><br><a href="tel:+15551234567">(555) 123-4567</a></p>
-            <p><strong>WhatsApp:</strong><br><a href="https://wa.me/15551234567">(555) 123-4567</a></p>
+            <p id="phone"><a id="phone-link" href="#">—</a></p>
+            <p id="whatsapp"><a id="wa-link" href="#">—</a></p>
           </div>
 
-          <div class="info-card">
+          <div class="info-card" id="card-email">
             <h3>✉️ Имейл</h3>
-            <p><strong>Общи въпроси:</strong><br><a href="mailto:hello@beautyzaminuti.com">hello@beautyzaminuti.com</a></p>
-            <p><strong>Резервации:</strong><br><a href="mailto:book@beautyzaminuti.com">book@beautyzaminuti.com</a></p>
+            <p id="email-general"><a id="email-general-link" href="#">—</a></p>
+            <p id="email-booking"><a id="email-booking-link" href="#">—</a></p>
           </div>
 
-          <div class="info-card">
+          <div class="info-card" id="card-hours">
             <h3>🕐 Работно време</h3>
-            <p><strong>Понеделник - Петък:</strong><br>9:00 - 20:00</p>
-            <p><strong>Събота:</strong><br>10:00 - 18:00</p>
-            <p><strong>Неделя:</strong><br>Почивен ден</p>
+            <div id="hours">—</div>
           </div>
         </div>
       </div>
@@ -268,6 +272,113 @@
       <a href="#contact">Контакти</a>
     </div>
   </footer>
+
+  <!-- Scroll-based active nav highlighting -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+      const linkById = {};
+      navLinks.forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && href.startsWith('#')) linkById[href.slice(1)] = a;
+      });
+
+      const sections = Object.keys(linkById)
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+      if (!sections.length) return;
+
+      const header = document.querySelector('header');
+      const getHeaderHeight = () => (header ? header.offsetHeight : 0);
+
+      // Utility to set active link
+      const setActive = (id) => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = linkById[id];
+        if (link) link.classList.add('active');
+      };
+
+      // IntersectionObserver (works in most browsers)
+      let ioSupported = 'IntersectionObserver' in window;
+      if (ioSupported) {
+        try {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              const id = entry.target.id;
+              if (!id) return;
+              if (entry.isIntersecting) {
+                setActive(id);
+              }
+            });
+          }, {
+            root: null,
+            // slightly earlier trigger
+            rootMargin: '-30% 0px -50% 0px',
+            threshold: 0
+          });
+          sections.forEach(s => observer.observe(s));
+        } catch (e) {
+          ioSupported = false;
+        }
+      }
+
+      // Fallback / Safari-friendly method: use a rAF-throttled scroll handler
+      // This will pick the section that sits under the header area.
+      let ticking = false;
+      const updateActiveByScroll = () => {
+        const headerH = getHeaderHeight();
+        // pick the first section whose top is <= headerH + 10 and bottom > headerH + 10
+        let found = null;
+        for (let i = 0; i < sections.length; i++) {
+          const s = sections[i];
+          const rect = s.getBoundingClientRect();
+          const topVisible = rect.top <= headerH + 12;
+          const bottomVisible = rect.bottom > headerH + 12;
+          if (topVisible && bottomVisible) {
+            found = s;
+            break;
+          }
+        }
+
+        // If none matched (e.g., scrolled above first section), choose the one with smallest positive top
+        if (!found) {
+          let closest = null;
+          let minTop = Infinity;
+          for (let i = 0; i < sections.length; i++) {
+            const rect = sections[i].getBoundingClientRect();
+            if (rect.top >= 0 && rect.top < minTop) {
+              minTop = rect.top;
+              closest = sections[i];
+            }
+          }
+          found = closest || sections[0];
+        }
+
+        if (found && found.id) setActive(found.id);
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateActiveByScroll);
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', () => requestAnimationFrame(updateActiveByScroll));
+      // initial run
+      requestAnimationFrame(updateActiveByScroll);
+
+      // Click feedback: make clicked link active immediately
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+    });
+  </script>
 
   <script>
     // Use IntersectionObserver to highlight active nav link and toggle header scroll style
@@ -321,5 +432,70 @@
       });
     })();
   </script>
+  </script>
+
+  <script>
+    // Populate contact info from contact.json (if available)
+    (function () {
+      async function loadContact() {
+        try {
+          const res = await fetch('contact.json?v=1', { cache: 'no-store' });
+          if (!res.ok) return;
+          const data = await res.json();
+
+          // Logo
+          const logo = document.getElementById('business-logo');
+          if (logo && data.logo) logo.src = data.logo;
+
+          // Address
+          const addressEl = document.getElementById('address');
+          if (addressEl && data.address) addressEl.innerHTML = data.address.replace(/\n/g, '<br>');
+
+          // Phone
+          const phoneLink = document.getElementById('phone-link');
+          if (phoneLink && data.phone) {
+            phoneLink.href = `tel:${data.phone}`;
+            phoneLink.textContent = data.phone;
+          }
+
+          // WhatsApp
+          const waLink = document.getElementById('wa-link');
+          const waEl = document.getElementById('whatsapp');
+          if (waLink && data.whatsapp) {
+            // Format for wa.me (strip non-digits)
+            const digits = data.whatsapp.replace(/\D/g, '');
+            waLink.href = `https://wa.me/${digits}`;
+            waLink.textContent = data.whatsapp;
+          } else if (waEl) {
+            waEl.style.display = 'none';
+          }
+
+          // Emails
+          const eGen = document.getElementById('email-general-link');
+          if (eGen && data.email_general) {
+            eGen.href = `mailto:${data.email_general}`;
+            eGen.textContent = data.email_general;
+          }
+          const eBook = document.getElementById('email-booking-link');
+          if (eBook && data.email_booking) {
+            eBook.href = `mailto:${data.email_booking}`;
+            eBook.textContent = data.email_booking;
+          }
+
+          // Hours
+          const hoursEl = document.getElementById('hours');
+          if (hoursEl && Array.isArray(data.hours)) {
+            hoursEl.innerHTML = data.hours.map(h => `<p><strong>${h.label}:</strong><br>${h.time}</p>`).join('');
+          }
+        } catch (err) {
+          // fail silently
+          console.warn('Could not load contact.json', err);
+        }
+      }
+
+      loadContact();
+    })();
+  </script>
+
 </body>
 </html>

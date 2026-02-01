@@ -16,7 +16,7 @@
         <li><a href="#about">За нас</a></li>
         <li><a href="#services">Услуги</a></li>
         <li><a href="#why">Защо да ни изберете</a></li>
-        <li><a href="#contact">Контакти</a></li>
+        <li><a href="#contact">Запази си час</a></li>
       </ul>
     </nav>
   </header>
@@ -179,7 +179,7 @@
 
     <section id="contact" class="contact-section">
       <div>
-        <h2>Форма за контакт</h2>
+        <h2>Запазване на час</h2>
         <form>
           <div class="form-group">
             <label for="name">Име и фамилия *</label>
@@ -241,18 +241,50 @@
           <div class="info-card" id="card-address">
             <h3>📍 Местоположение</h3>
             <p id="address">—</p>
+            <div class="contact-ctas">
+              <a id="directions-btn" class="cta-btn secondary" href="#" target="_blank">Как да стигна</a>
+            </div>
           </div>
 
           <div class="info-card" id="card-phone">
             <h3>📞 Телефон</h3>
             <p id="phone"><a id="phone-link" href="#">—</a></p>
             <p id="whatsapp"><a id="wa-link" href="#">—</a></p>
+            <div class="contact-ctas">
+              <a id="call-btn" class="cta-btn primary" href="#">
+                <!-- phone SVG -->
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57.13.38.04.81-.24 1.01l-2.2 2.2z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span class="label">Обадете се</span>
+              </a>
+
+              <a id="wa-btn" class="cta-btn secondary" href="#" target="_blank">
+                <!-- whatsapp SVG -->
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M16.6 7.4a5.2 5.2 0 00-7.4 0 5.2 5.2 0 00-1 1.6L8 11l1.9-.5a5.2 5.2 0 001.6-1 5.2 5.2 0 007.4 7.4A8.2 8.2 0 0120 18a8.2 8.2 0 01-8.2 8.2A12 12 0 014 12.2 8.2 8.2 0 0112.2 4 8.2 8.2 0 0120 11.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span class="label">WhatsApp</span>
+              </a>
+
+              <a id="viber-btn" class="cta-btn viber" href="#">
+                <!-- viber SVG -->
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 15.5c0 1.9-2.5 3.6-6.8 4-1.2.1-2.4.1-3.5 0-4.3-.4-6.7-2.1-6.7-4V8.5C4 6.6 6.5 4.9 10.8 4.5c1.1-.1 2.3-.1 3.5 0C18 4.9 21 6.6 21 8.5v7z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span class="label">Viber</span>
+              </a>
+            </div>
           </div>
 
           <div class="info-card" id="card-email">
             <h3>✉️ Имейл</h3>
             <p id="email-general"><a id="email-general-link" href="#">—</a></p>
             <p id="email-booking"><a id="email-booking-link" href="#">—</a></p>
+          </div>
+
+          <div class="info-card" id="card-social">
+            <h3>🌐 Социални</h3>
+            <p>
+              <a id="fb-link" href="#" target="_blank" class="social-link">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 2h-3a4 4 0 00-4 4v3H8v4h3v8h4v-8h3l1-4h-4V6a1 1 0 011-1h3V2z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="label">Facebook</span>
+              </a>
+            </p>
           </div>
 
           <div class="info-card" id="card-hours">
@@ -265,11 +297,11 @@
   </main>
 
   <footer>
-    <p>&copy; 2024 Beauty за минути. Всички права запазени.</p>
-    <p>Правим ви красиви — по минута.</p>
+    <p>&copy; 2026 Beauty за минути. Всички права запазени.</p>
+    <p>Правим ви красиви — за минути.</p>
     <div class="footer-links">
       <a href="#services">Услуги</a>
-      <a href="#contact">Контакти</a>
+      <a href="#contact">Запази си час</a>
     </div>
   </footer>
 
@@ -443,9 +475,25 @@
           if (!res.ok) return;
           const data = await res.json();
 
-          // Logo
-          const logo = document.getElementById('business-logo');
-          if (logo && data.logo) logo.src = data.logo;
+          // Logo or embedded map
+          const cardLogo = document.getElementById('card-logo');
+          // If a map link or address is provided, show an embedded map instead of the image placeholder
+          if (cardLogo && (data.maps_link || data.address)) {
+            let src = '';
+            if (data.maps_link && (data.maps_link.includes('/embed') || data.maps_link.includes('output=embed'))) {
+              src = data.maps_link;
+            } else if (data.maps_link && data.maps_link.length > 0) {
+              // fallback to maps_link (non-embed) - we will not trust it directly for embed, use address if available
+              src = `https://www.google.com/maps?q=${encodeURIComponent(data.address || '')}&output=embed`;
+            } else {
+              src = `https://www.google.com/maps?q=${encodeURIComponent(data.address)}&output=embed`;
+            }
+
+            cardLogo.innerHTML = `<iframe src="${src}" width="100%" height="180" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+          } else {
+            const logo = document.getElementById('business-logo');
+            if (logo && data.logo) logo.src = data.logo;
+          }
 
           // Address
           const addressEl = document.getElementById('address');
@@ -468,6 +516,56 @@
             waLink.textContent = data.whatsapp;
           } else if (waEl) {
             waEl.style.display = 'none';
+          }
+
+          // CTA buttons: call, whatsapp, directions
+          const callBtn = document.getElementById('call-btn');
+          const waBtn = document.getElementById('wa-btn');
+          const directionsBtn = document.getElementById('directions-btn');
+          if (callBtn && data.phone) {
+            callBtn.href = `tel:${data.phone}`;
+            callBtn.setAttribute('aria-label', `Call ${data.phone}`);
+          } else if (callBtn) {
+            callBtn.style.display = 'none';
+          }
+
+          if (waBtn && data.whatsapp) {
+            const digits = data.whatsapp.replace(/\D/g, '');
+            waBtn.href = `https://wa.me/${digits}`;
+            waBtn.setAttribute('aria-label', `WhatsApp ${data.whatsapp}`);
+          } else if (waBtn) {
+            waBtn.style.display = 'none';
+          }
+
+          // Viber
+          const viberBtn = document.getElementById('viber-btn');
+          if (viberBtn && (data.viber || data.phone)) {
+            const vnum = (data.viber || data.phone).replace(/\D/g, '');
+            // Deep link for Viber; on web it may prompt the app
+            viberBtn.href = `viber://chat?number=%2B${vnum}`;
+            viberBtn.setAttribute('aria-label', `Viber ${data.viber || data.phone}`);
+          } else if (viberBtn) {
+            viberBtn.style.display = 'none';
+          }
+
+          // Facebook
+          const fbLink = document.getElementById('fb-link');
+          if (fbLink && data.facebook) {
+            fbLink.href = data.facebook;
+            // keep inner icon+label, but add accessible title
+            fbLink.title = 'Facebook: ' + data.facebook;
+          } else if (fbLink) {
+            fbLink.style.display = 'none';
+          }
+
+          if (directionsBtn) {
+            if (data.maps_link) {
+              directionsBtn.href = data.maps_link;
+            } else if (data.address) {
+              directionsBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.address)}`;
+            } else {
+              directionsBtn.style.display = 'none';
+            }
           }
 
           // Emails

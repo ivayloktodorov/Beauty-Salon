@@ -1,8 +1,8 @@
 {
   "name": "Beauty за минути",
-  "address": "123 Beauty Avenue\nNew York, NY 10001\nСъединени щати",
-  "phone": "+15551234567",
-  "whatsapp": "+15551234567",
+  "address": "гр. Варна, ул. Райко Жинзифов 18, гр. Варна, България",
+  "phone": "+359877741060",
+  "whatsapp": "+359877741060",
   "email_general": "hello@beautyzaminuti.com",
   "email_booking": "book@beautyzaminuti.com",
   "hours": [
@@ -11,5 +11,8 @@
     { "label": "Неделя", "time": "Почивен ден" }
   ],
   "logo": "assets/logo-placeholder.png",
+  "maps_link": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2790.9117239000525!2d27.904737985544262!3d43.20310650699188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a453f3491e450f%3A0xae9f32012fdb53d9!2zIkJlYXV0eSDQt9CwINC80LjQvdGD0YLQuCI!5e1!3m2!1sen!2sbg!4v1769891372148!5m2!1sen!2sbg",
+  "facebook": "https://www.facebook.com/beauty4mins",
+  "viber": "+359877741060",
   "source": "manual"
 }

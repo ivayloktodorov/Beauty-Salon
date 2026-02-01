@@ -430,6 +430,93 @@ textarea {
   transition: var(--transition);
 }
 
+/* Contact-specific tweaks */
+#contact-info {
+  align-items: start;
+}
+
+#card-logo img {
+  background: linear-gradient(135deg, rgba(201,168,79,0.06), rgba(166,124,45,0.03));
+  padding: 0.5rem;
+}
+
+#card-address p,#card-phone p {
+  margin: 0.4rem 0;
+  color: var(--text-light);
+}
+
+#phone-link {
+  color: var(--primary-light);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.contact-ctas {
+  margin-top: 0.9rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 44px; /* recommended tap target */
+}
+
+.cta-btn.primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: #0b0b0b;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+
+.cta-btn.secondary {
+  background: transparent;
+  color: var(--primary-light);
+  border: 1px solid rgba(201,168,79,0.18);
+}
+
+.cta-btn.viber {
+  background: linear-gradient(135deg, #6b2fb0, #4b1a7a);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(75,26,122,0.35);
+}
+
+.cta-btn .icon { width: 18px; height: 18px; margin-right: 0.6rem; display: inline-block; vertical-align: middle; }
+
+.social-link {
+  color: var(--primary-light);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.social-link:hover { text-decoration: underline; }
+
+.cta-btn:active { transform: translateY(1px); }
+
+/* Emphasize address */
+#address {
+  font-size: 0.98rem;
+  color: var(--text-light);
+}
+
+/* Mobile: make CTAs larger and stacked */
+@media (max-width: 767px) {
+  .contact-ctas { flex-direction: column; }
+  .cta-btn { width: 100%; padding: 1rem; font-size: 1.02rem; }
+  #phone-link { font-size: 1.12rem; }
+}
+
 .info-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);

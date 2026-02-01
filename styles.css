@@ -462,7 +462,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.85rem 1rem;
+  padding: 0.6rem 1rem;
   border-radius: 10px;
   font-weight: 700;
   text-decoration: none;
@@ -489,7 +489,21 @@ textarea {
   box-shadow: 0 6px 18px rgba(75,26,122,0.35);
 }
 
-.cta-btn .icon { width: 18px; height: 18px; margin-right: 0.6rem; display: inline-block; vertical-align: middle; }
+.cta-btn .icon { width: 20px; height: 20px; margin-right: 0.6rem; display: inline-block; vertical-align: middle; }
+
+/* Make CTAs consistent in the contact (phone) card: same width/height and centered labels */
+.contact-ctas .cta-btn {
+  min-width: 120px;
+  padding: 0.55rem 0.95rem;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+#phone-compact {
+  margin-bottom: 0.6rem;
+  color: var(--text-light);
+  font-size: 0.98rem;
+}
 
 .social-link {
   color: var(--primary-light);
